@@ -1,0 +1,10 @@
+/home/chris/CAP4053/Starmap/Starmap/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/chris/CAP4053/Starmap/Starmap/bin/Debug/OpenTK.dll.config
+/home/chris/CAP4053/Starmap/Starmap/bin/Debug/Tao.Sdl.dll.config
+/home/chris/CAP4053/Starmap/Starmap/bin/Debug/Starmap.exe.mdb
+/home/chris/CAP4053/Starmap/Starmap/bin/Debug/Starmap.exe
+/home/chris/CAP4053/Starmap/Starmap/obj/x86/Debug/Starmap.exe
+/home/chris/CAP4053/Starmap/Starmap/obj/x86/Debug/Starmap.exe.mdb
+/home/chris/CAP4053/Starmap/Starmap/bin/Debug/MonoGame.Framework.dll
+/home/chris/CAP4053/Starmap/Starmap/bin/Debug/OpenTK.dll
+/home/chris/CAP4053/Starmap/Starmap/bin/Debug/Tao.Sdl.dll
