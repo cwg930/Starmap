@@ -18,11 +18,14 @@ namespace Starmap
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
+		GameState gameState;
+		Screen currentScreen;
+
 		public Game1 ()
 		{
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";	            
-			graphics.IsFullScreen = true;		
+			graphics.IsFullScreen = true;
 		}
 
 		/// <summary>
@@ -34,6 +37,8 @@ namespace Starmap
 		protected override void Initialize ()
 		{
 			// TODO: Add your initialization logic here
+			gameState = GameState.MainMenu;
+			currentScreen = new MenuScreen ();
 			base.Initialize ();
 				
 		}
@@ -46,7 +51,6 @@ namespace Starmap
 		{
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch (GraphicsDevice);
-
 			//TODO: use this.Content to load your game content here 
 		}
 
@@ -65,7 +69,18 @@ namespace Starmap
 				Exit ();
 			}
 			#endif
-			// TODO: Add your update logic here			
+			// TODO: Add your update logic here	
+			switch (gameState) {
+			case GameState.MainMenu:
+				break;
+			case GameState.Loading:
+				break;
+			case GameState.Gameplay:
+				break;
+			case GameState.EndOfGame:
+			default:
+			}
+
 			base.Update (gameTime);
 		}
 
