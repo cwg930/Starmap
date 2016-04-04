@@ -52,9 +52,15 @@
     <Compile Include="Source\Tower.cs" />
     <Compile Include="Source\Unit.cs" />
     <Compile Include="Source\Map.cs" />
-    <Compile Include="Source\Tile.cs" />
     <Compile Include="Source\MenuScreen.cs" />
     <Compile Include="Source\Button.cs" />
+    <Compile Include="Source\AdjacentAgentSensor.cs" />
+    <Compile Include="Source\Sensor.cs" />
+    <Compile Include="Source\GameplayScreen.cs" />
+    <Compile Include="Source\Grid.cs" />
+    <Compile Include="Source\PathNodeSensor.cs" />
+    <Compile Include="Source\Tile.cs" />
+    <Compile Include="Source\Agent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />

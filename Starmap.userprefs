@@ -1,15 +1,19 @@
 ﻿<Properties StartupItem="Starmap/Starmap.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Starmap/Source/MenuScreen.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Starmap/Source/GameplayScreen.cs">
     <Files>
-      <File FileName="Starmap/Source/Unit.cs" Line="1" Column="1" />
+      <File FileName="Starmap/Source/Unit.cs" Line="35" Column="4" />
       <File FileName="Starmap/Source/Map.cs" Line="1" Column="1" />
       <File FileName="Starmap/Source/Tile.cs" Line="1" Column="1" />
       <File FileName="Starmap/Source/Screen.cs" Line="1" Column="1" />
-      <File FileName="Starmap/Source/MenuScreen.cs" Line="31" Column="50" />
+      <File FileName="Starmap/Source/MenuScreen.cs" Line="33" Column="4" />
       <File FileName="Starmap/Source/GameState.cs" Line="1" Column="1" />
       <File FileName="Starmap/Source/Game1.cs" Line="1" Column="1" />
-      <File FileName="Starmap/Source/Button.cs" Line="1" Column="1" />
+      <File FileName="Starmap/Source/Button.cs" Line="23" Column="4" />
+      <File FileName="Starmap/Source/Tower.cs" Line="21" Column="3" />
+      <File FileName="Starmap/Source/Sensor.cs" Line="29" Column="4" />
+      <File FileName="Starmap/Source/AdjacentAgentSensor.cs" Line="19" Column="3" />
+      <File FileName="Starmap/Source/GameplayScreen.cs" Line="5" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
