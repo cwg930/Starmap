@@ -11,13 +11,12 @@ namespace Starmap
 	public class Grid
 	{
 		#region Fields
-		private Game1 game;
 		private List<Tile> tileList;
 		private Texture2D openTileTexture;
 		private Texture2D closedTileTexture;
 		private Texture2D pathTileTexture;
 		private Tile[,] grid;
-		private bool debugDrawEnabled;
+		private bool debugDrawEnabled = true;
 		private int tileWidth;
 		#endregion
 
@@ -30,33 +29,39 @@ namespace Starmap
 		#endregion
 
 		#region Constructors
-		public Grid (Game1 game, int tileWidth, int drawPadding)
+		public Grid (int tileWidth, int drawPadding)
 		{
-			this.game = game;
 			this.tileWidth = tileWidth;
 
+			Initialize (drawPadding);
+		}
+		#endregion
+
+		#region Methods
+		private void Initialize(int drawPadding)
+		{
 			Color[] data = new Color[(tileWidth-drawPadding) * (tileWidth-drawPadding)];
 
 			// Build texture for non-obstructed tiles (Green)
 			for (int i = 0; i < data.Length; i++)
 				data [i] = Color.Green;
-			openTileTexture = new Texture2D (game.GraphicsDevice, (tileWidth-drawPadding), (tileWidth-drawPadding));
+			openTileTexture = new Texture2D (Game1.Instance.GraphicsDevice, (tileWidth-drawPadding), (tileWidth-drawPadding));
 			openTileTexture.SetData (data);
 
 			// Build texture for obstructed tiles (Red)
 			for (int i = 0; i < data.Length; i++)
 				data [i] = Color.Red;
-			closedTileTexture = new Texture2D (game.GraphicsDevice, (tileWidth-drawPadding), (tileWidth-drawPadding));
+			closedTileTexture = new Texture2D (Game1.Instance.GraphicsDevice, (tileWidth-drawPadding), (tileWidth-drawPadding));
 			closedTileTexture.SetData (data);
 
 			// Build texture for path element tiles (Yellow)
 			for (int i = 0; i < data.Length; i++)
 				data [i] = Color.Yellow;
-			pathTileTexture = new Texture2D (game.GraphicsDevice, (tileWidth-drawPadding), (tileWidth-drawPadding));
+			pathTileTexture = new Texture2D (Game1.Instance.GraphicsDevice, (tileWidth-drawPadding), (tileWidth-drawPadding));
 			pathTileTexture.SetData (data);
 
 			// Create a new grid of navigation tiles.
-			grid = new Tile[game.GraphicsDevice.DisplayMode.Width / tileWidth, game.GraphicsDevice.DisplayMode.Height / tileWidth];
+			grid = new Tile[Game1.Instance.GraphicsDevice.DisplayMode.Width / tileWidth, Game1.Instance.GraphicsDevice.DisplayMode.Height / tileWidth];
 			tileList = new List<Tile> ();
 			for (int i = 0; i < grid.GetLength(0); i++)
 			{
@@ -67,9 +72,7 @@ namespace Starmap
 				}
 			}
 		}
-		#endregion
 
-		#region Methods
 		public void Draw(SpriteBatch spriteBatch)
 		{
 			if (debugDrawEnabled)
@@ -103,14 +106,14 @@ namespace Starmap
 			{
 				for (int j = 0; j < grid.GetLength (1); j++)
 				{
-					foreach (Wall wall in game.GetWalls())
+					/*foreach (Wall wall in Game1.Instance.GetWalls())
 					{
 						// Use wall GridBox to give us some padding around walls.
 						if (grid [i, j].RealBoundary.Intersects (wall.GridBox))
 							grid [i, j].SetClosed ();
 						else if (grid [i, j].TileStatus != Tile.Status.Closed)
 							grid [i, j].SetOpen ();
-					}
+					}*/
 				}
 			}
 		}

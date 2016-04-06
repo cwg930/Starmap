@@ -19,10 +19,10 @@ namespace Starmap
 
 		#region Methods
 		//Finds all agents in range of owner then calculates distance and relative heading
-		public override void Update (List<Unit> units)
+		public override void Update (List<Agent> agents)
 		{
 			AgentsInRange.Clear ();
-			foreach (Unit u in units){
+			foreach (Unit u in agents){
 				if (Vector2.Distance (owner.Position, u.Position) <= range) {
 					Vector2 v = u.Position - owner.Position;
 					//cross product used to determine if target is cw/ccw from heading

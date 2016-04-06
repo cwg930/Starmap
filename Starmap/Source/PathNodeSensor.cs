@@ -25,7 +25,7 @@ namespace Starmap
 
 		#region Methods
 		//Finds all tiles in range of owner
-		public override void Update ()
+		public void Update ()
 		{
 			tilesInRange.Clear ();
 			foreach (Tile a in game.GetGrid().GetTileList())

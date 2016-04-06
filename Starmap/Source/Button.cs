@@ -18,9 +18,6 @@ namespace Starmap
 		#endregion
 
 		#region Constructors
-		public Button()
-		{
-		}
 
 		public Button(string text, Texture2D image, Vector2 position)
 		{

@@ -7,20 +7,26 @@ namespace Starmap
 	public abstract class Screen
 	{
 		#region Fields
-		GraphicsDeviceManager graphics;
-		SpriteBatch spriteBatch;
+		protected static Screen instance;
+		#endregion
 
+		#region Properties
+		public static Screen Instance{
+			get{
+				return instance;
+			}
+		}
 		#endregion
 
 		#region Methods
-		public Screen (GraphicsDeviceManager graphics, SpriteBatch spriteBatch)
+		public Screen ()
 		{
-			this.graphics = graphics;
-			this.spriteBatch = spriteBatch;
+			
 		}
-		public virtual void Draw (GameTime gameTime) 
+		public virtual void Draw (SpriteBatch sb) 
 		{
 		}
+		protected abstract void LoadContent ();
 		#endregion
 	}
 }

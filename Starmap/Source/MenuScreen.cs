@@ -13,9 +13,10 @@ namespace Starmap
 		#endregion
 
 		#region Constructors
-		public MenuScreen (SpriteFont font)
+		public MenuScreen ()
 		{
-			this.menuFont = font;
+			if (instance != this)
+				instance = this;
 		}
 		#endregion
 
@@ -25,8 +26,9 @@ namespace Starmap
 			
 		}
 
-		public void LoadContent()
+		protected override void LoadContent()
 		{
+			menuFont = Game1.Instance.Content.Load<SpriteFont> ("Fonts/MenuFont");
 		}
 
 		public override void Draw (SpriteBatch sb)

@@ -2,3 +2,4 @@ Starmap.userprefs
 *.exe
 *.mdb
 *~
+Starmap/Content/obj/*

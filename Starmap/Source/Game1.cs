@@ -15,17 +15,29 @@ namespace Starmap
 	/// </summary>
 	public class Game1 : Game
 	{
+		private static Game1 instance;
+
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
 		GameState gameState;
 		Screen currentScreen;
 
+		public static Game1 Instance {
+			get {
+				return instance;
+			}
+		}
+
+
 		public Game1 ()
 		{
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";	            
 			graphics.IsFullScreen = true;
+			this.IsMouseVisible = true;
+			if(instance  = null)
+				instance = this;
 		}
 
 		/// <summary>
@@ -70,16 +82,6 @@ namespace Starmap
 			}
 			#endif
 			// TODO: Add your update logic here	
-			switch (gameState) {
-			case GameState.MainMenu:
-				break;
-			case GameState.Loading:
-				break;
-			case GameState.Gameplay:
-				break;
-			case GameState.EndOfGame:
-			default:
-			}
 
 			base.Update (gameTime);
 		}
@@ -95,6 +97,16 @@ namespace Starmap
 			//TODO: Add your drawing code here
             
 			base.Draw (gameTime);
+		}
+
+		public void UpdateGameState(GameState state)
+		{
+			switch (state) {
+			case GameState.MainMenu:
+				break;
+			case GameState.Gameplay:
+				currentScreen = new GameplayScreen ();
+			}
 		}
 	}
 }

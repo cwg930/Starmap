@@ -66,6 +66,7 @@
     <None Include="Icon.png" />
     <None Include="Content\Content.mgcb" />
     <None Include="packages.config" />
+    <None Include="Content\Fonts\MenuFont.xnb" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="OpenTK.dll.config">

@@ -19,11 +19,11 @@ namespace Starmap
 		#endregion
 
 		#region Methods
-		public Unit (int moveSpeed, int reward, Texture2D tex, Vector2 position)
+		public Unit (int moveSpeed, int reward, Texture2D texture, Vector2 position)
 		{
 			this.moveSpeed = moveSpeed;
 			this.reward = reward;
-			this.unitTex = tex;
+			this.agentTexture = texture;
 			this.position = position;
 		}			
 
@@ -34,7 +34,7 @@ namespace Starmap
 
 		public void Draw(SpriteBatch sb)
 		{
-			sb.Draw (unitTex, position, Color.White);
+			sb.Draw (agentTexture, position, Color.White);
 		}	
 		#endregion
 	}

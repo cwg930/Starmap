@@ -7,9 +7,9 @@ namespace Starmap
 	public abstract class Agent
 	{
 		#region Fields
-		private Vector2 position;
-		private float heading;
-		private Texture2D agentTexture;
+		protected Vector2 position;
+		protected float heading;
+		protected Texture2D agentTexture;
 		#endregion
 
 		#region Properties
