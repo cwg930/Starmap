@@ -16,6 +16,11 @@ namespace Starmap
 		public int HitPoints { get; set; }
 		public int MoveSpeed { get { return moveSpeed; } }
 		public int Reward { get { return reward; } }
+		public override Rectangle BoundingBox {
+			get {
+				return new Rectangle ((int)position.X, (int)position.Y, Width, Height);
+			}
+		}
 		#endregion
 
 		#region Methods

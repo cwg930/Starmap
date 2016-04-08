@@ -51,7 +51,6 @@
     <Compile Include="Source\Screen.cs" />
     <Compile Include="Source\Tower.cs" />
     <Compile Include="Source\Unit.cs" />
-    <Compile Include="Source\Map.cs" />
     <Compile Include="Source\MenuScreen.cs" />
     <Compile Include="Source\Button.cs" />
     <Compile Include="Source\AdjacentAgentSensor.cs" />
@@ -61,18 +60,28 @@
     <Compile Include="Source\PathNodeSensor.cs" />
     <Compile Include="Source\Tile.cs" />
     <Compile Include="Source\Agent.cs" />
+    <Compile Include="Source\Wall.cs" />
+    <Compile Include="Source\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
     <None Include="Content\Content.mgcb" />
     <None Include="packages.config" />
-    <None Include="Content\Fonts\MenuFont.xnb" />
+    <None Include="GameSettings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="OpenTK.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Tao.Sdl.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\MenuFont.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Graphics\WallQuad.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

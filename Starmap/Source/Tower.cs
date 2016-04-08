@@ -16,7 +16,7 @@ namespace Starmap
 		public int Damage { get { return damage; } }
 		public Vector2 Position { get { return position; } }
 		public float Heading { get { return heading; } }
-		public Vector2 HeadingVector { get { return new Vector2 (Math.Sin (heading), Math.Cos (heading)); } }
+		public Vector2 HeadingVector { get { return new Vector2 ((float)Math.Sin (heading), (float)Math.Cos (heading)); } }
 		#endregion
 
 		public Tower ()

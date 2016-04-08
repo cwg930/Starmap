@@ -15,7 +15,10 @@ namespace Starmap
 		#region Properties
 		public float Heading { get { return heading; } }
 		public Vector2 HeadingVector { get { return new Vector2 ((float)Math.Cos (heading), (float)Math.Sin (heading)); } }
-		public Texture2D AgentTexture { get { return agentTexture; } }
+		public Texture2D AgentTexture { 
+			get { return agentTexture; } 
+			set { agentTexture = value; }
+		}
 		public Vector2 Position { get { return position; } }
 		public abstract Rectangle BoundingBox {
 			get; 

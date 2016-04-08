@@ -16,6 +16,7 @@ namespace Starmap
 		#region Fields
 		private Rectangle realBoundary;
 		private Rectangle drawableBoundary;
+		private Vector2 position;
 		private Vector2 center;
 		private Status status;
 		private Point gridLocation;
@@ -47,11 +48,16 @@ namespace Starmap
 			get { return gridLocation; }
 			private set { }
 		}
+		public Vector2 Position 
+		{
+			get { return position; }
+		}
 		#endregion
 
 		#region Constructors
 		public Tile (Point topLeft, int width, int drawPadding)
 		{
+			this.position = new Vector2 (topLeft.X, topLeft.Y);
 			this.gridLocation = new Point (topLeft.X / width, topLeft.Y / width);
 			this.realBoundary = new Rectangle (topLeft.X, topLeft.Y, width, width);
 			this.drawableBoundary = new Rectangle ((topLeft.X + drawPadding), (topLeft.Y + drawPadding), (width - drawPadding), (width - drawPadding));

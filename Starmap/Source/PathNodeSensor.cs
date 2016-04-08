@@ -18,7 +18,7 @@ namespace Starmap
 		#endregion
 
 		#region Constructors
-		public PathNodeSensor(Game1 game, Unit owner, float range) : base (game, owner, range){
+		public PathNodeSensor(Unit owner, float range) : base (owner, range){
 			tilesInRange = new List<Tile> ();
 		}
 		#endregion
@@ -28,11 +28,11 @@ namespace Starmap
 		public void Update ()
 		{
 			tilesInRange.Clear ();
-			foreach (Tile a in game.GetGrid().GetTileList())
-			{
-				if (Vector2.Distance (owner.Position, a.Center) <= range && a.TileStatus != Tile.Status.Closed) 
-				{
-					tilesInRange.Add (a);
+			if (Screen.Instance.GetType() == typeof(GameplayScreen)) {
+				foreach (Tile a in (Screen.Instance as GameplayScreen).GetGrid().GetTileList()) {
+					if (Vector2.Distance (owner.Position, a.Center) <= range && a.TileStatus != Tile.Status.Closed) {
+						tilesInRange.Add (a);
+					}
 				}
 			}
 		}

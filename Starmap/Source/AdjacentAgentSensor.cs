@@ -19,7 +19,7 @@ namespace Starmap
 
 		#region Methods
 		//Finds all agents in range of owner then calculates distance and relative heading
-		public override void Update (List<Agent> agents)
+		public void Update (List<Agent> agents)
 		{
 			AgentsInRange.Clear ();
 			foreach (Unit u in agents){

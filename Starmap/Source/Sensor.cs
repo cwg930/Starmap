@@ -38,7 +38,7 @@ namespace Starmap
 		#endregion
 
 		#region Methods
-		public abstract void Update(List<Agent> agents);
+		//public abstract void Update(List<Agent> agents);
 		#endregion
 	}
 }

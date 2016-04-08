@@ -106,14 +106,14 @@ namespace Starmap
 			{
 				for (int j = 0; j < grid.GetLength (1); j++)
 				{
-					/*foreach (Wall wall in Game1.Instance.GetWalls())
+					foreach (Wall wall in (GameplayScreen.Instance as GameplayScreen).Walls)
 					{
 						// Use wall GridBox to give us some padding around walls.
 						if (grid [i, j].RealBoundary.Intersects (wall.GridBox))
 							grid [i, j].SetClosed ();
 						else if (grid [i, j].TileStatus != Tile.Status.Closed)
 							grid [i, j].SetOpen ();
-					}*/
+					}
 				}
 			}
 		}

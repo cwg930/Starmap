@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 using System;
-
+using System.Xml.Serialization;
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
@@ -22,6 +23,11 @@ namespace Starmap
 
 		GameState gameState;
 		Screen currentScreen;
+		Settings gameSettings;
+
+		public Settings GameSettings {
+			get { return gameSettings; }
+		}
 
 		public static Game1 Instance {
 			get {
@@ -29,15 +35,20 @@ namespace Starmap
 			}
 		}
 
+		public static Random RandomGenerator { 
+			get; 
+			private set;
+		}
 
 		public Game1 ()
 		{
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";	            
-			graphics.IsFullScreen = true;
+			graphics.IsFullScreen = false;
 			this.IsMouseVisible = true;
-			if(instance  = null)
+			if(instance == null)
 				instance = this;
+			RandomGenerator = new Random ();
 		}
 
 		/// <summary>
@@ -51,6 +62,7 @@ namespace Starmap
 			// TODO: Add your initialization logic here
 			gameState = GameState.MainMenu;
 			currentScreen = new MenuScreen ();
+			LoadSettings ();
 			base.Initialize ();
 				
 		}
@@ -82,7 +94,7 @@ namespace Starmap
 			}
 			#endif
 			// TODO: Add your update logic here	
-
+			currentScreen.Update();
 			base.Update (gameTime);
 		}
 
@@ -93,7 +105,7 @@ namespace Starmap
 		protected override void Draw (GameTime gameTime)
 		{
 			graphics.GraphicsDevice.Clear (Color.CornflowerBlue);
-			currentScreen.Draw (gameTime);
+			currentScreen.Draw (spriteBatch);
 			//TODO: Add your drawing code here
             
 			base.Draw (gameTime);
@@ -103,9 +115,26 @@ namespace Starmap
 		{
 			switch (state) {
 			case GameState.MainMenu:
+				currentScreen = new MenuScreen ();
 				break;
 			case GameState.Gameplay:
 				currentScreen = new GameplayScreen ();
+				break;
+			default: 
+				break;
+			}
+		}
+
+		private void LoadSettings()
+		{
+			try{
+				FileStream fs = File.OpenRead("GameSettings.xml");
+				XmlSerializer serializer = new XmlSerializer(typeof(Settings));
+				gameSettings = (Settings)serializer.Deserialize(fs);
+			}catch(Exception e){
+				Console.WriteLine ("Error: Cannot load settings file, using default values");
+				gameSettings.NumWalls = 5;
+				gameSettings.WallGenChance = 0.15;
 			}
 		}
 	}

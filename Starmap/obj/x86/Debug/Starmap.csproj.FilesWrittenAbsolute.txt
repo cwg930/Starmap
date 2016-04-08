@@ -8,3 +8,6 @@
 /home/chris/CAP4053/Starmap/Starmap/bin/Debug/MonoGame.Framework.dll
 /home/chris/CAP4053/Starmap/Starmap/bin/Debug/OpenTK.dll
 /home/chris/CAP4053/Starmap/Starmap/bin/Debug/Tao.Sdl.dll
+/home/chris/CAP4053/Starmap/Starmap/bin/Debug/Content/Fonts/MenuFont.xnb
+/home/chris/CAP4053/Starmap/Starmap/bin/Debug/GameSettings.xml
+/home/chris/CAP4053/Starmap/Starmap/bin/Debug/Content/Graphics/WallQuad.xnb

@@ -23,9 +23,13 @@ namespace Starmap
 		{
 			
 		}
+
+		public abstract void Update();
+
 		public virtual void Draw (SpriteBatch sb) 
 		{
 		}
+			
 		protected abstract void LoadContent ();
 		#endregion
 	}

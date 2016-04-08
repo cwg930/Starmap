@@ -24,6 +24,7 @@ namespace Starmap
 			this.text = text;
 			this.image = image;
 			this.position = position;
+			bounds = new Rectangle ((int)position.X, (int)position.Y, image.Width, image.Height);
 		}
 
 		public void Draw(SpriteBatch sb, SpriteFont font)
