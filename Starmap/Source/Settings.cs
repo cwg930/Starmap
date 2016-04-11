@@ -6,6 +6,9 @@ namespace Starmap
 	{
 		public int NumWalls;
 		public double WallGenChance;
+		public int SpriteHeight;
+		public int SpriteWidth;
+		public int SpriteAnimationFrames;
 	}
 }
 

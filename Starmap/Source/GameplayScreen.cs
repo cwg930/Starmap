@@ -15,6 +15,7 @@ namespace Starmap
 		List<Tower> towers;
 		List<Wall> walls;
 		Texture2D wallTexture;
+		Texture2D[] creatureSprites;
 		KeyboardState currentKeyboardState;
 		KeyboardState previousKeyboardState;
 		MouseState mouseState;
@@ -55,6 +56,17 @@ namespace Starmap
 			wallTexture = Game1.Instance.Content.Load<Texture2D> ("Graphics/WallQuad");
 			foreach (Wall w in walls) {
 				w.AgentTexture = wallTexture;
+			}
+			Texture2D spriteSheet = Game1.Instance.Content.Load<Texture2D> ("Graphics/Creatures");
+			int spriteHeight = Game1.Instance.GameSettings.SpriteHeight;
+			int numSlices = spriteSheet.Height / spriteHeight;
+			creatureSprites = new Texture2D[numSlices];
+			for (int i = 0; i < numSlices; i++) {
+				Rectangle source = new Rectangle (0, i * spriteHeight, spriteSheet.Width, spriteHeight);
+				Color[] data = new Color[spriteHeight * spriteSheet.Width];
+				spriteSheet.GetData (0, source, data, 0, spriteHeight * spriteSheet.Width);
+				creatureSprites [i] = new Texture2D (Game1.Instance.GraphicsDevice, spriteSheet.Width, spriteHeight);
+				creatureSprites [i].SetData (data);
 			}
 		}
 
@@ -101,7 +113,18 @@ namespace Starmap
 			if (isPlacementMode) {
 				sb.Draw (wallTexture, new Vector2(mouseState.Position.X, mouseState.Position.Y), Color.TransparentBlack);
 			}
+
+			//DEBUG CODE DELETE THIS
+			for (int i = 0; i < creatureSprites.Length; i++) {
+				sb.Draw (creatureSprites [i], new Vector2 (i*Game1.Instance.GameSettings.SpriteWidth, i * Game1.Instance.GameSettings.SpriteHeight), Color.White);
+			}
+			//END DEBUG CODE
 			sb.End ();
+		}
+
+		private void SpawnNewWave(int numUnits)
+		{
+			
 		}
 	}
 }
