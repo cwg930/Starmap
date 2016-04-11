@@ -105,7 +105,7 @@ namespace Starmap
 		protected override void Draw (GameTime gameTime)
 		{
 			graphics.GraphicsDevice.Clear (Color.CornflowerBlue);
-			currentScreen.Draw (spriteBatch);
+			currentScreen.Draw (spriteBatch, gameTime);
 			//TODO: Add your drawing code here
             
 			base.Draw (gameTime);

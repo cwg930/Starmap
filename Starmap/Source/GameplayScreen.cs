@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,6 +11,8 @@ namespace Starmap
 	{
 		#region Fields
 		Grid mapGrid;
+		Tile startTile;
+		Tile endTile;
 		SpriteFont gameTextFont;
 		List<Unit> units;
 		List<Tower> towers;
@@ -40,6 +43,7 @@ namespace Starmap
 		protected void Initialize()
 		{
 			mapGrid = new Grid (32, 0);
+			units = new List<Unit> ();
 			walls = new List<Wall> ();
 			int i = Game1.Instance.GameSettings.NumWalls;
 			foreach (Tile t in mapGrid.GetTileList()) {
@@ -48,6 +52,8 @@ namespace Starmap
 					i--;
 				}
 			}
+			startTile = mapGrid.GetTileAtPosition (new Point (0, Game1.RandomGenerator.Next(Game1.Instance.GraphicsDevice.Viewport.Height)));
+			endTile = mapGrid.GetTileAtPosition (new Point (Game1.Instance.GraphicsDevice.Viewport.Width, Game1.RandomGenerator.Next(Game1.Instance.GraphicsDevice.Viewport.Height)));
 		}
 
 		protected override void LoadContent ()
@@ -84,6 +90,10 @@ namespace Starmap
 				isPlacementMode = !isPlacementMode;
 				Console.WriteLine ("Placement Mode: " + isPlacementMode);
 			}
+			if (currentKeyboardState.IsKeyDown (Keys.X) && previousKeyboardState.IsKeyUp (Keys.X)) {
+				Thread t = new Thread(SpawnNewWave);
+				t.Start (10);
+			}
 
 			if (isPlacementMode) {
 				if (mouseState.LeftButton == ButtonState.Pressed) {
@@ -93,7 +103,9 @@ namespace Starmap
 					walls.Add (w);
 				}
 			}
-
+			foreach (Unit u in units) {
+				u.Update (endTile);
+			}
 			mapGrid.Update ();
 		}
 
@@ -102,7 +114,7 @@ namespace Starmap
 			return mapGrid;
 		}
 
-		public override void Draw (SpriteBatch sb)
+		public override void Draw (SpriteBatch sb, GameTime deltaTime)
 		{
 			sb.Begin ();
 			sb.DrawString (gameTextFont, "GAMEPLAY SCREEN", new Vector2 (Game1.Instance.GraphicsDevice.Viewport.Width / 2, Game1.Instance.GraphicsDevice.Viewport.Height / 2), Color.Black);
@@ -110,21 +122,26 @@ namespace Starmap
 			foreach (Wall w in walls) {
 				w.Draw (sb);
 			}
+			foreach (Unit u in units) {
+				u.Draw (sb, deltaTime);
+			}
 			if (isPlacementMode) {
 				sb.Draw (wallTexture, new Vector2(mouseState.Position.X, mouseState.Position.Y), Color.TransparentBlack);
 			}
 
-			//DEBUG CODE DELETE THIS
-			for (int i = 0; i < creatureSprites.Length; i++) {
-				sb.Draw (creatureSprites [i], new Vector2 (i*Game1.Instance.GameSettings.SpriteWidth, i * Game1.Instance.GameSettings.SpriteHeight), Color.White);
-			}
-			//END DEBUG CODE
 			sb.End ();
 		}
 
-		private void SpawnNewWave(int numUnits)
+		private void SpawnNewWave(object data)
 		{
-			
+			int numUnits = Convert.ToInt32(data);
+			units.Clear();
+			int textureIndex = Game1.RandomGenerator.Next (creatureSprites.Length);
+			for (int i = 0; i < numUnits; i++) {
+				Unit u = new Unit (10, creatureSprites[textureIndex], startTile.Position);
+				units.Add (u);
+				Thread.Sleep (250);
+			}
 		}
 	}
 }

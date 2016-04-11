@@ -5,4 +5,5 @@
 	<SpriteHeight>32</SpriteHeight>
 	<SpriteWidth>32</SpriteWidth>
 	<SpriteAnimationFrames>3</SpriteAnimationFrames>
+	<AnimationFrameTime>0.1</AnimationFrameTime>
 </Settings>

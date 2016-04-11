@@ -36,7 +36,7 @@ namespace Starmap
 			menuFont = Game1.Instance.Content.Load<SpriteFont> ("Fonts/MenuFont");
 		}
 
-		public override void Draw (SpriteBatch sb)
+		public override void Draw (SpriteBatch sb, GameTime deltaTime)
 		{
 			sb.Begin ();
 			sb.DrawString (menuFont, "MENU SCREEN\n" + Game1.Instance.GameSettings.NumWalls + " " + Game1.Instance.GameSettings.WallGenChance, new Vector2(Game1.Instance.GraphicsDevice.Viewport.Width / 2, Game1.Instance.GraphicsDevice.Viewport.Height / 2), Color.Black);

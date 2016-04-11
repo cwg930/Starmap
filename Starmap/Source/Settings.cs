@@ -9,6 +9,7 @@ namespace Starmap
 		public int SpriteHeight;
 		public int SpriteWidth;
 		public int SpriteAnimationFrames;
+		public float AnimationFrameTime;
 	}
 }
 

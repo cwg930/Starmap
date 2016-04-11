@@ -26,7 +26,7 @@ namespace Starmap
 
 		public abstract void Update();
 
-		public virtual void Draw (SpriteBatch sb) 
+		public virtual void Draw (SpriteBatch sb, GameTime deltaTime) 
 		{
 		}
 			
