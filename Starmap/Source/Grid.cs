@@ -124,6 +124,14 @@ namespace Starmap
 			return tileList;
 		}
 
+		public Tile GetTileAtPosition(Point position)
+		{
+			int x, y;
+			x = position.X / tileWidth;
+			y = position.Y / tileWidth;
+			return grid [x, y];
+		}
+
 		// Find shortest path using A* from a start position to an end position.
 		public List<Tile> FindPath(Point start, Point end)
 		{
