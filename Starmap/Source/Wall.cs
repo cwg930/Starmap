@@ -12,7 +12,7 @@ namespace Starmap
 		}
 		// Used like costmap inflation to prevent pathing too close to walls.
 		public Rectangle GridBox {
-			get { return new Rectangle ((int)Position.X - 5, (int)Position.Y - 5, Width + 10, Height + 10);}
+			get { return new Rectangle ((int)Position.X, (int)Position.Y, Width, Height);}
 		}
 		#endregion
 

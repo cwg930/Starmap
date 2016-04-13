@@ -144,8 +144,8 @@ namespace Starmap
 			List<Tile> closedList = new List<Tile> ();
 
 			// Configure start and end tiles.
-			Tile current = grid[start.X, start.Y];
-			Tile finish = grid [end.X, end.Y];
+			Tile current = GetTileAtPosition(start);
+			Tile finish = GetTileAtPosition(end);
 			// Cannot continue to path to blocked tile.
 			if (finish.TileStatus == Tile.Status.Closed)
 				return null;
@@ -220,10 +220,12 @@ namespace Starmap
 
 			// Path found, construct the path in reverse order.
 			List<Tile> path = new List<Tile> ();
+			finish.SetPath();
 			path.Add (finish);
 			Tile prevTile = previousTiles [finish];
 			while (prevTile != null)
 			{
+				prevTile.SetPath ();
 				path.Add (prevTile);
 				prevTile = previousTiles [prevTile];
 			}

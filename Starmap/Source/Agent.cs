@@ -20,6 +20,8 @@ namespace Starmap
 			set { agentTexture = value; }
 		}
 		public Vector2 Position { get { return position; } }
+		public Vector2 Center { get { return new Vector2 (position.X + Game1.Instance.GameSettings.SpriteWidth/2, 
+			position.Y + Game1.Instance.GameSettings.SpriteHeight/2);} }
 		public abstract Rectangle BoundingBox {
 			get; 
 		}

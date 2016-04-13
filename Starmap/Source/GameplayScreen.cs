@@ -17,6 +17,7 @@ namespace Starmap
 		List<Unit> units;
 		List<Tower> towers;
 		List<Wall> walls;
+		List<Tile> path;
 		Texture2D wallTexture;
 		Texture2D[] creatureSprites;
 		KeyboardState currentKeyboardState;
@@ -36,13 +37,13 @@ namespace Starmap
 		{
 			if (instance != this)
 				instance = this;
-			Initialize ();
 			LoadContent ();
+			Initialize ();
 		}
 
 		protected void Initialize()
 		{
-			mapGrid = new Grid (32, 0);
+			mapGrid = new Grid (Game1.Instance.GameSettings.TileWidth, 0);
 			units = new List<Unit> ();
 			walls = new List<Wall> ();
 			int i = Game1.Instance.GameSettings.NumWalls;
@@ -52,17 +53,20 @@ namespace Starmap
 					i--;
 				}
 			}
+			foreach (Wall w in walls) {
+				w.AgentTexture = wallTexture;
+			}
 			startTile = mapGrid.GetTileAtPosition (new Point (0, Game1.RandomGenerator.Next(Game1.Instance.GraphicsDevice.Viewport.Height)));
 			endTile = mapGrid.GetTileAtPosition (new Point (Game1.Instance.GraphicsDevice.Viewport.Width, Game1.RandomGenerator.Next(Game1.Instance.GraphicsDevice.Viewport.Height)));
+			mapGrid.Update ();
+			path = mapGrid.FindPath (startTile.Position.ToPoint(), endTile.Position.ToPoint());
 		}
 
 		protected override void LoadContent ()
 		{
 			gameTextFont = Game1.Instance.Content.Load<SpriteFont> ("Fonts/MenuFont");
 			wallTexture = Game1.Instance.Content.Load<Texture2D> ("Graphics/WallQuad");
-			foreach (Wall w in walls) {
-				w.AgentTexture = wallTexture;
-			}
+
 			Texture2D spriteSheet = Game1.Instance.Content.Load<Texture2D> ("Graphics/Creatures");
 			int spriteHeight = Game1.Instance.GameSettings.SpriteHeight;
 			int numSlices = spriteSheet.Height / spriteHeight;
@@ -101,12 +105,9 @@ namespace Starmap
 					Wall w = new Wall (t.Position);
 					w.AgentTexture = wallTexture;
 					walls.Add (w);
+					mapGrid.Update ();
 				}
 			}
-			foreach (Unit u in units) {
-				u.Update (endTile);
-			}
-			mapGrid.Update ();
 		}
 
 		public Grid GetGrid ()
@@ -138,7 +139,7 @@ namespace Starmap
 			units.Clear();
 			int textureIndex = Game1.RandomGenerator.Next (creatureSprites.Length);
 			for (int i = 0; i < numUnits; i++) {
-				Unit u = new Unit (10, creatureSprites[textureIndex], startTile.Position);
+				Unit u = new Unit (10, creatureSprites[textureIndex], startTile.Position, path);
 				units.Add (u);
 				Thread.Sleep (250);
 			}
