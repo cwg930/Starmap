@@ -12,3 +12,4 @@
 /home/chris/CAP4053/Starmap/Starmap/bin/Debug/GameSettings.xml
 /home/chris/CAP4053/Starmap/Starmap/bin/Debug/Content/Graphics/WallQuad.xnb
 /home/chris/CAP4053/Starmap/Starmap/bin/Debug/Content/Graphics/Creatures.xnb
+/home/chris/CAP4053/Starmap/Starmap/bin/Debug/Content/Graphics/Player.xnb

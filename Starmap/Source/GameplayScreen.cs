@@ -19,17 +19,23 @@ namespace Starmap
 		List<Wall> walls;
 		List<Tile> path;
 		Texture2D wallTexture;
+		Texture2D towerTexture; 
 		Texture2D[] creatureSprites;
 		KeyboardState currentKeyboardState;
 		KeyboardState previousKeyboardState;
 		MouseState mouseState;
-		bool isPlacementMode = false;
+		bool wallPlacementMode = false;
+		bool towerPlacementMode = false;
 		#endregion
 
 		#region Properties
 		public List<Wall> Walls 
 		{
 			get { return walls; }
+		}
+		public List<Unit> Units
+		{
+			get { return units; }
 		}
 		#endregion
 		
@@ -46,6 +52,7 @@ namespace Starmap
 			mapGrid = new Grid (Game1.Instance.GameSettings.TileWidth, 0);
 			units = new List<Unit> ();
 			walls = new List<Wall> ();
+			towers = new List<Tower> ();
 			int i = Game1.Instance.GameSettings.NumWalls;
 			foreach (Tile t in mapGrid.GetTileList()) {
 				if (Game1.RandomGenerator.NextDouble () < Game1.Instance.GameSettings.WallGenChance && i > 0) {
@@ -68,7 +75,7 @@ namespace Starmap
 			wallTexture = Game1.Instance.Content.Load<Texture2D> ("Graphics/WallQuad");
 
 			Texture2D spriteSheet = Game1.Instance.Content.Load<Texture2D> ("Graphics/Creatures");
-			int spriteHeight = Game1.Instance.GameSettings.SpriteHeight;
+			int spriteHeight = Game1.Instance.GameSettings.UnitHeight;
 			int numSlices = spriteSheet.Height / spriteHeight;
 			creatureSprites = new Texture2D[numSlices];
 			for (int i = 0; i < numSlices; i++) {
@@ -78,6 +85,7 @@ namespace Starmap
 				creatureSprites [i] = new Texture2D (Game1.Instance.GraphicsDevice, spriteSheet.Width, spriteHeight);
 				creatureSprites [i].SetData (data);
 			}
+			towerTexture = Game1.Instance.Content.Load<Texture2D> ("Graphics/Player");
 		}
 
 		public override void Update()
@@ -91,23 +99,41 @@ namespace Starmap
 				return;
 			}
 			if (currentKeyboardState.IsKeyDown (Keys.W) && previousKeyboardState.IsKeyUp (Keys.W)) {
-				isPlacementMode = !isPlacementMode;
-				Console.WriteLine ("Placement Mode: " + isPlacementMode);
+				wallPlacementMode = !wallPlacementMode;
+				towerPlacementMode = false;
+				Console.WriteLine ("Placement Mode: " + wallPlacementMode);
 			}
 			if (currentKeyboardState.IsKeyDown (Keys.X) && previousKeyboardState.IsKeyUp (Keys.X)) {
 				Thread t = new Thread(SpawnNewWave);
 				t.Start (10);
 			}
 
-			if (isPlacementMode) {
-				if (mouseState.LeftButton == ButtonState.Pressed) {
+			if (currentKeyboardState.IsKeyDown (Keys.D1) && previousKeyboardState.IsKeyUp (Keys.D1)) {
+				towerPlacementMode = !towerPlacementMode;
+				wallPlacementMode = false;
+			}
+
+			if (mouseState.LeftButton == ButtonState.Pressed) {
+				if (wallPlacementMode) {
 					Tile t = mapGrid.GetTileAtPosition (mouseState.Position);
 					Wall w = new Wall (t.Position);
 					w.AgentTexture = wallTexture;
 					walls.Add (w);
 					mapGrid.Update ();
 				}
+				if (towerPlacementMode) {
+					foreach (Wall w in walls) {
+						if(w.BoundingBox.Contains(mouseState.Position)){
+							Tower t = new Tower(w.Center, 10, 100);
+							t.AgentTexture = towerTexture;
+							towers.Add(t);
+						}
+					}
+				}
+				wallPlacementMode = false;
+				towerPlacementMode = false;
 			}
+
 		}
 
 		public Grid GetGrid ()
@@ -126,7 +152,10 @@ namespace Starmap
 			foreach (Unit u in units) {
 				u.Draw (sb, deltaTime);
 			}
-			if (isPlacementMode) {
+			foreach (Tower t in towers) {
+				t.Draw (sb);
+			}
+			if (wallPlacementMode) {
 				sb.Draw (wallTexture, new Vector2(mouseState.Position.X, mouseState.Position.Y), Color.TransparentBlack);
 			}
 
@@ -141,7 +170,7 @@ namespace Starmap
 			for (int i = 0; i < numUnits; i++) {
 				Unit u = new Unit (10, creatureSprites[textureIndex], startTile.Position, path);
 				units.Add (u);
-				Thread.Sleep (250);
+				Thread.Sleep (300);
 			}
 		}
 	}

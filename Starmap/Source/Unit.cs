@@ -14,13 +14,13 @@ namespace Starmap
 		private float turnSpeed = MathHelper.ToRadians(5.0f); 
 		private int reward;
 		private PathNodeSensor pathSensor;
-		private const float ANGLE_TOLERANCE = 0.5f;
-		private const float DISTANCE_TOLERANCE = 5.0f;
+		private const float ANGLE_TOLERANCE = 0.1f;
+		private const float DISTANCE_TOLERANCE = 2.0f;
 		private float time;
 		private int frameIndex;
-		private int totalFrames = Game1.Instance.GameSettings.SpriteAnimationFrames;
-		private int frameWidth = Game1.Instance.GameSettings.SpriteWidth;
-		private int frameHeight = Game1.Instance.GameSettings.SpriteHeight;
+		private int totalFrames = Game1.Instance.GameSettings.UnitAnimationFrames;
+		private int frameWidth = Game1.Instance.GameSettings.UnitWidth;
+		private int frameHeight = Game1.Instance.GameSettings.UnitHeight;
 		private LinkedList<Tile> path;
 		private Thread pathThread;
 		#endregion
@@ -57,6 +57,7 @@ namespace Starmap
 
 		private void Initialize()
 		{
+			center = new Vector2 (Game1.Instance.GameSettings.UnitWidth / 2, Game1.Instance.GameSettings.UnitHeight / 2);
 			pathSensor = new PathNodeSensor (this, 100);
 			pathThread = new Thread (FollowPath);
 			pathThread.Start ();
@@ -92,7 +93,7 @@ namespace Starmap
 				}
 				if (path.Count > 0) {
 					Seek (path.First.Value.Center);
-					Thread.Sleep (50);
+					Thread.Sleep (25);
 				}
 			}
 		}

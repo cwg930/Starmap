@@ -20,6 +20,7 @@ namespace Starmap
 		public Wall(Vector2 position)
 		{
 			this.position = position;
+			this.center = new Vector2 (position.X + Game1.Instance.GameSettings.WallWidth / 2, position.Y + Game1.Instance.GameSettings.WallHeight / 2);
 		}
 		#endregion
 

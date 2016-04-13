@@ -2,9 +2,13 @@
 <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<NumWalls>30</NumWalls>
 	<WallGenChance>0.05</WallGenChance>
-	<SpriteHeight>32</SpriteHeight>
-	<SpriteWidth>32</SpriteWidth>
-	<SpriteAnimationFrames>3</SpriteAnimationFrames>
+	<UnitHeight>32</UnitHeight>
+	<UnitWidth>32</UnitWidth>
+	<UnitAnimationFrames>3</UnitAnimationFrames>
 	<AnimationFrameTime>0.1</AnimationFrameTime>
 	<TileWidth>32</TileWidth>
+	<WallHeight>64</WallHeight>
+	<WallWidth>64</WallWidth>
+	<TowerHeight>30</TowerHeight>
+	<TowerWidth>30</TowerWidth>
 </Settings>

@@ -6,11 +6,15 @@ namespace Starmap
 	{
 		public int NumWalls;
 		public double WallGenChance;
-		public int SpriteHeight;
-		public int SpriteWidth;
-		public int SpriteAnimationFrames;
+		public int UnitHeight;
+		public int UnitWidth;
+		public int UnitAnimationFrames;
 		public float AnimationFrameTime;
 		public int TileWidth;
+		public int WallHeight;
+		public int WallWidth;
+		public int TowerHeight;
+		public int TowerWidth;
 	}
 }
 

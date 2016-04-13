@@ -8,6 +8,7 @@ namespace Starmap
 	{
 		#region Fields
 		protected Vector2 position;
+		protected Vector2 center;
 		protected float heading;
 		protected Texture2D agentTexture;
 		#endregion
@@ -20,8 +21,7 @@ namespace Starmap
 			set { agentTexture = value; }
 		}
 		public Vector2 Position { get { return position; } }
-		public Vector2 Center { get { return new Vector2 (position.X + Game1.Instance.GameSettings.SpriteWidth/2, 
-			position.Y + Game1.Instance.GameSettings.SpriteHeight/2);} }
+		public Vector2 Center { get { return center;} }
 		public abstract Rectangle BoundingBox {
 			get; 
 		}
