@@ -10,7 +10,7 @@ namespace Starmap
 	{
 
 		#region Fields
-		private float moveSpeed = 2.0f;
+		private float moveSpeed = 1.0f;
 		private float turnSpeed = MathHelper.ToRadians(5.0f); 
 		private int reward;
 		private PathNodeSensor pathSensor;
@@ -59,13 +59,25 @@ namespace Starmap
 		{
 			center = new Vector2 (Game1.Instance.GameSettings.UnitWidth / 2, Game1.Instance.GameSettings.UnitHeight / 2);
 			pathSensor = new PathNodeSensor (this, 100);
-			pathThread = new Thread (FollowPath);
-			pathThread.Start ();
+		//	pathThread = new Thread (FollowPath);
+		//	pathThread.Start ();
 		}
 
-		public void Update(Tile goalTile)
+		public void Update()
 		{
-			Seek (goalTile.Center);
+			Point currentLocation;
+			if (path.Count > 0) {
+				currentLocation = new Point ((int)position.X / Game1.Instance.GameSettings.TileWidth, 
+					(int)position.Y / Game1.Instance.GameSettings.TileWidth);
+				if (currentLocation == path.First.Value.GridLocation) {
+					path.First.Value.SetOpen ();
+					path.RemoveFirst();
+				}
+				if (path.Count > 0) {
+					Seek (path.First.Value.Center);
+					//Thread.Sleep (25);
+				}
+			}
 		}
 
 		public void Draw(SpriteBatch sb, GameTime deltaTime)
@@ -81,7 +93,8 @@ namespace Starmap
 			Rectangle source = new Rectangle (frameIndex * frameWidth, 0, frameWidth, frameHeight); 
 			sb.Draw (agentTexture, position, source, Color.White);
 		}	
-
+		/*
+		 * FollowPath method for multithreaded path following -- NOT NEEDED
 		private void FollowPath()
 		{
 			Point currentLocation;
@@ -97,7 +110,7 @@ namespace Starmap
 				}
 			}
 		}
-
+		*/
 		private void Seek(Vector2 goal)
 		{
 			Vector2 goalVector = goal - this.Position;

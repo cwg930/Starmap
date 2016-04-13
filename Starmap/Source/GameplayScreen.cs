@@ -133,6 +133,9 @@ namespace Starmap
 				wallPlacementMode = false;
 				towerPlacementMode = false;
 			}
+			foreach (Unit u in units) {
+				u.Update ();
+			}
 
 		}
 
