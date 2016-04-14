@@ -67,10 +67,9 @@ namespace Starmap
 		{
 			Point currentLocation;
 			if (path.Count > 0) {
-				currentLocation = new Point ((int)position.X / Game1.Instance.GameSettings.TileWidth, 
-					(int)position.Y / Game1.Instance.GameSettings.TileWidth);
+				currentLocation = new Point ((int)(position.X + center.X) / Game1.Instance.GameSettings.TileWidth, 
+					(int)(position.Y + center.Y) / Game1.Instance.GameSettings.TileWidth);
 				if (currentLocation == path.First.Value.GridLocation) {
-					path.First.Value.SetOpen ();
 					path.RemoveFirst();
 				}
 				if (path.Count > 0) {
@@ -113,7 +112,7 @@ namespace Starmap
 		*/
 		private void Seek(Vector2 goal)
 		{
-			Vector2 goalVector = goal - this.Position;
+			Vector2 goalVector = goal - (this.position + this.center);
 
 			float velX = 0.0f;
 			float velY = 0.0f;
@@ -133,7 +132,7 @@ namespace Starmap
 			}
 			else
 			{
-				if (Vector2.Distance (position, goal) > DISTANCE_TOLERANCE)
+				if (Vector2.Distance (center, goal) > DISTANCE_TOLERANCE)
 				{
 					velX = (float)(Math.Cos (Heading) * moveSpeed);
 					velY = (float)(Math.Sin (Heading) * moveSpeed);

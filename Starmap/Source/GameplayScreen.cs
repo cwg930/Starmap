@@ -120,6 +120,7 @@ namespace Starmap
 					w.AgentTexture = wallTexture;
 					walls.Add (w);
 					mapGrid.Update ();
+					mapGrid.FindPath (startTile.Position.ToPoint(), endTile.Position.ToPoint());
 				}
 				if (towerPlacementMode) {
 					foreach (Wall w in walls) {
@@ -147,7 +148,7 @@ namespace Starmap
 		public override void Draw (SpriteBatch sb, GameTime deltaTime)
 		{
 			sb.Begin ();
-			sb.DrawString (gameTextFont, "GAMEPLAY SCREEN", new Vector2 (Game1.Instance.GraphicsDevice.Viewport.Width / 2, Game1.Instance.GraphicsDevice.Viewport.Height / 2), Color.Black);
+			//sb.DrawString (gameTextFont, "GAMEPLAY SCREEN", new Vector2 (Game1.Instance.GraphicsDevice.Viewport.Width / 2, Game1.Instance.GraphicsDevice.Viewport.Height / 2), Color.Black);
 			mapGrid.Draw (sb);
 			foreach (Wall w in walls) {
 				w.Draw (sb);
@@ -159,7 +160,7 @@ namespace Starmap
 				t.Draw (sb);
 			}
 			if (wallPlacementMode) {
-				sb.Draw (wallTexture, new Vector2(mouseState.Position.X, mouseState.Position.Y), Color.TransparentBlack);
+				sb.Draw (wallTexture, new Vector2(mouseState.Position.X, mouseState.Position.Y), Color.White);
 			}
 
 			sb.End ();
