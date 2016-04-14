@@ -37,6 +37,9 @@ namespace Starmap
 		{
 			get { return units; }
 		}
+		public SpriteFont GameTextFont {
+			get { return gameTextFont; }
+		}
 		#endregion
 		
 		public GameplayScreen () : base()
@@ -125,7 +128,7 @@ namespace Starmap
 				if (towerPlacementMode) {
 					foreach (Wall w in walls) {
 						if(w.BoundingBox.Contains(mouseState.Position)){
-							Tower t = new Tower(w.Center, 10, 100);
+							Tower t = new Tower(w.Center, 5, 100);
 							t.AgentTexture = towerTexture;
 							towers.Add(t);
 						}
@@ -136,6 +139,9 @@ namespace Starmap
 			}
 			foreach (Unit u in units) {
 				u.Update ();
+			}
+			foreach (Tower t in towers) {
+				t.Update ();
 			}
 
 		}
@@ -172,7 +178,7 @@ namespace Starmap
 			units.Clear();
 			int textureIndex = Game1.RandomGenerator.Next (creatureSprites.Length);
 			for (int i = 0; i < numUnits; i++) {
-				Unit u = new Unit (10, creatureSprites[textureIndex], startTile.Position, path);
+				Unit u = new Unit (i, 20, 10, creatureSprites[textureIndex], startTile.Position, path);
 				units.Add (u);
 				Thread.Sleep (300);
 			}

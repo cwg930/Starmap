@@ -10,6 +10,8 @@ namespace Starmap
 	{
 		#region Fields
 		private int damage;
+		private float turnSpeed = MathHelper.ToRadians(5.0f);
+		private const float ANGLE_TOLERANCE = 0.5f;
 		private AdjacentAgentSensor AASensor;
 		#endregion
 
@@ -38,17 +40,35 @@ namespace Starmap
 		public void Update()
 		{
 			AASensor.Update ();
-			var targets = from pair in AASensor.AgentsInRange
+			var targets = AASensor.AgentsInRange.OrderBy (i => i.Key.ID);
+				/* from pair in AASensor.AgentsInRange
 			              orderby pair.Value.Item1 ascending
-			              select pair;
-			foreach (KeyValuePair<Unit, Tuple<float,float>> p in targets) {
-				Console.WriteLine (p.Key + " " + p.Value.Item1 + " " + p.Value.Item2);
+			              select pair; */
+			if (targets.Count () > 0) {
+				KeyValuePair<Unit, Tuple<float, float>> target = targets.First ();
+				if (target.Value.Item2 < 0 + ANGLE_TOLERANCE && target.Value.Item2 > 0 - ANGLE_TOLERANCE) {
+					Shoot (target.Key);
+				} else {
+					if (target.Value.Item2 > 0 && target.Value.Item2 < 180) {
+						heading += turnSpeed;
+					} else {
+						heading -= turnSpeed;
+					}
+				}
 			}
 		}
 
 		public void Draw(SpriteBatch sb)
 		{
 			sb.Draw (agentTexture, position, null, Color.White, heading, center, 1.0f, SpriteEffects.None, 0f);
+		}
+
+		private void Shoot(Unit target)
+		{
+			target.HitPoints -= damage;
+			if (target.HitPoints <= 0) {
+				(Screen.Instance as GameplayScreen).Units.Remove (target);
+			}
 		}
 	}
 }

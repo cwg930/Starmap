@@ -13,6 +13,7 @@ namespace Starmap
 		private float moveSpeed = 1.0f;
 		private float turnSpeed = MathHelper.ToRadians(5.0f); 
 		private int reward;
+		private int id;
 		private PathNodeSensor pathSensor;
 		private const float ANGLE_TOLERANCE = 0.1f;
 		private const float DISTANCE_TOLERANCE = 2.0f;
@@ -26,6 +27,7 @@ namespace Starmap
 		#endregion
 
 		#region Properties
+		public int ID { get { return id; } }
 		public int HitPoints { get; set; }
 		public float MoveSpeed { get { return moveSpeed; } }
 		public int Reward { get { return reward; } }
@@ -37,8 +39,10 @@ namespace Starmap
 		#endregion
 
 		#region Methods
-		public Unit(int reward, Texture2D texture, Vector2 position, List<Tile> path)
+		public Unit(int id, int hp, int reward, Texture2D texture, Vector2 position, List<Tile> path)
 		{
+			this.id = id;
+			this.HitPoints = hp;
 			this.reward = reward;
 			this.agentTexture = texture;
 			this.position = position;
@@ -91,6 +95,7 @@ namespace Starmap
 			}
 			Rectangle source = new Rectangle (frameIndex * frameWidth, 0, frameWidth, frameHeight); 
 			sb.Draw (agentTexture, position, source, Color.White);
+			sb.DrawString ((Screen.Instance as GameplayScreen).GameTextFont, HitPoints.ToString(), position, Color.Red);
 		}	
 		/*
 		 * FollowPath method for multithreaded path following -- NOT NEEDED
