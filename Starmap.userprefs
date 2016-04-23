@@ -1,38 +1,22 @@
 ﻿<Properties StartupItem="Starmap/Starmap.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Starmap/Source/GameplayScreen.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Starmap/Source/Unit.cs">
     <Files>
-      <File FileName="Starmap/Source/Unit.cs" Line="21" Column="68" />
-      <File FileName="Starmap/Source/Screen.cs" Line="30" Column="4" />
-      <File FileName="Starmap/Source/MenuScreen.cs" Line="26" Column="19" />
-      <File FileName="Starmap/Source/Game1.cs" Line="25" Column="3" />
-      <File FileName="Starmap/Source/Button.cs" Line="27" Column="89" />
-      <File FileName="Starmap/Source/Tower.cs" Line="19" Column="67" />
+      <File FileName="Starmap/Source/Unit.cs" Line="107" Column="28" />
+      <File FileName="Starmap/Source/Screen.cs" Line="1" Column="1" />
+      <File FileName="Starmap/Source/MenuScreen.cs" Line="1" Column="1" />
+      <File FileName="Starmap/Source/Game1.cs" Line="1" Column="1" />
+      <File FileName="Starmap/Source/Button.cs" Line="1" Column="1" />
+      <File FileName="Starmap/Source/Tower.cs" Line="1" Column="1" />
       <File FileName="Starmap/Source/GameplayScreen.cs" Line="23" Column="18" />
-      <File FileName="Starmap/Source/Tile.cs" Line="5" Column="18" />
-      <File FileName="Starmap/Source/Grid.cs" Line="83" Column="7" />
-      <File FileName="Starmap/Source/PathNodeSensor.cs" Line="17" Column="4" />
-      <File FileName="Starmap/Source/AdjacentAgentSensor.cs" Line="22" Column="10" />
-      <File FileName="Starmap/Source/Sensor.cs" Line="36" Column="23" />
-      <File FileName="Starmap/Source/Agent.cs" Line="22" Column="4" />
-      <File FileName="Starmap/Source/Program.cs" Line="26" Column="29" />
+      <File FileName="Starmap/Source/Tile.cs" Line="1" Column="1" />
+      <File FileName="Starmap/Source/Grid.cs" Line="1" Column="1" />
+      <File FileName="Starmap/Source/PathNodeSensor.cs" Line="1" Column="1" />
+      <File FileName="Starmap/Source/AdjacentAgentSensor.cs" Line="1" Column="1" />
+      <File FileName="Starmap/Source/Sensor.cs" Line="1" Column="1" />
+      <File FileName="Starmap/Source/Agent.cs" Line="1" Column="1" />
+      <File FileName="Starmap/Source/Program.cs" Line="1" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="Starmap" expanded="True">
-            <Node name="Starmap" expanded="True">
-              <Node name="Content" expanded="True">
-                <Node name="Fonts" expanded="True" />
-              </Node>
-              <Node name="Source" expanded="True">
-                <Node name="GameplayScreen.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
