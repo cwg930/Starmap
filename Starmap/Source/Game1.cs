@@ -94,7 +94,7 @@ namespace Starmap
 			}
 			#endif
 			// TODO: Add your update logic here	
-			currentScreen.Update();
+			currentScreen.Update(gameTime);
 			base.Update (gameTime);
 		}
 
@@ -119,6 +119,9 @@ namespace Starmap
 				break;
 			case GameState.Gameplay:
 				currentScreen = new GameplayScreen ();
+				break;
+			case GameState.EndOfGame:
+				currentScreen = new MenuScreen (true);
 				break;
 			default: 
 				break;

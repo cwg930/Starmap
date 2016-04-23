@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<NumWalls>30</NumWalls>
+	<NumWalls>0</NumWalls>
 	<WallGenChance>0.05</WallGenChance>
 	<UnitHeight>32</UnitHeight>
 	<UnitWidth>32</UnitWidth>
@@ -11,4 +11,17 @@
 	<WallWidth>64</WallWidth>
 	<TowerHeight>30</TowerHeight>
 	<TowerWidth>30</TowerWidth>
+	<StartingResources>100</StartingResources>
+	<WaveReward>20</WaveReward>
+	<UnitReward>5</UnitReward>
+	<StartingWaveUnits>10</StartingWaveUnits>
+	<UnitsPerWave>5</UnitsPerWave>
+	<UnitStartingHP>20</UnitStartingHP>
+	<UnitWaveHPMult>1.2</UnitWaveHPMult>
+	<PlayerLives>10</PlayerLives>
+	<TowerCost>20</TowerCost>
+	<WallCost>30</WallCost>
+	<SpawnDelay>1</SpawnDelay>
+	<WaveDelay>10</WaveDelay>
+	<ShotDelay>.25</ShotDelay>
 </Settings>
