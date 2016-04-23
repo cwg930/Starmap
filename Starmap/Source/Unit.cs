@@ -104,7 +104,7 @@ namespace Starmap
 			while (updatedPath.First.Value.GridLocation != this.path.First.Value.GridLocation)
 				updatedPath.RemoveFirst();
 				
-			this.path = new LinkedList<Tile>(updatedPath);
+			this.path = updatedPath;
 		}
 		/*
 		 * FollowPath method for multithreaded path following -- NOT NEEDED
