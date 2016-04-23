@@ -150,6 +150,8 @@ namespace Starmap
 						towers.Clear ();
 						badPlayer = true;
 					}
+					foreach (Unit u in units)
+						u.ChangePath (path);
 					playerResources -= Game1.Instance.GameSettings.WallCost;
 				}
 				if (towerPlacementMode && playerResources >= Game1.Instance.GameSettings.TowerCost) {

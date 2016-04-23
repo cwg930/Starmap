@@ -97,6 +97,15 @@ namespace Starmap
 			sb.Draw (agentTexture, position, source, Color.White);
 			sb.DrawString ((Screen.Instance as GameplayScreen).GameTextFont, HitPoints.ToString(), position, Color.Red);
 		}	
+
+		public void ChangePath(List<Tile> newPath)
+		{
+			LinkedList<Tile> updatedPath = new LinkedList<Tile> (newPath);
+			while (updatedPath.First.Value.GridLocation != this.path.First.Value.GridLocation)
+				updatedPath.RemoveFirst();
+				
+			this.path = new LinkedList<Tile>(updatedPath);
+		}
 		/*
 		 * FollowPath method for multithreaded path following -- NOT NEEDED
 		private void FollowPath()
