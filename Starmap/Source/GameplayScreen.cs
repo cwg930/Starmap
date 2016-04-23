@@ -149,25 +149,50 @@ namespace Starmap
 						walls.Clear ();
 						towers.Clear ();
 						badPlayer = true;
+						mapGrid.Reset ();
+						path = mapGrid.FindPath (startTile.Position.ToPoint (), endTile.Position.ToPoint ());
 					}
-					foreach (Unit u in units)
-						u.ChangePath (path);
+					List<int> indicesToRemove = new List<int> ();
+					for (int i = 0; i < Units.Count; i++)
+					{
+						Units [i].ChangePath (path);
+						if (Units [i].HitPoints == 0)
+							indicesToRemove.Add (i);
+					}
+					for (int i = Units.Count; i >= 0; i--)
+					{
+						if (indicesToRemove.Contains (i))
+							Units.RemoveAt (i);
+					}
 					playerResources -= Game1.Instance.GameSettings.WallCost;
 				}
 				if (towerPlacementMode && playerResources >= Game1.Instance.GameSettings.TowerCost) {
+					bool towerPresent = false;
 					foreach (Wall w in walls) {
 						if(w.BoundingBox.Contains(mouseState.Position)){
-							Tower t = new Tower(w.Center, 10, 100);
-							t.AgentTexture = towerTexture;
-							towers.Add(t);
-							playerResources -= Game1.Instance.GameSettings.TowerCost;
-							break;
+							foreach (Tower t in towers)
+								if (t.BoundingBox.Contains (mouseState.Position))
+									towerPresent = true;
+							if (!towerPresent)
+							{
+								Tower t = new Tower (w.Center, 10, 100);
+								t.AgentTexture = towerTexture;
+								towers.Add (t);
+								playerResources -= Game1.Instance.GameSettings.TowerCost;
+								break;
+							}
 						}
 					}
 				}
 				wallPlacementMode = false;
 				towerPlacementMode = false;
 			}
+			for (int i = towers.Count-1; i >= 0; i--)
+			{
+				if (towers [i].ShotsLeft <= 0)
+					towers.RemoveAt (i);
+			}
+
 			toDelete.Clear ();
 			for (int i = 0; i < units.Count; i++) {
 				units[i].Update ();

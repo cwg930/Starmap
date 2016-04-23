@@ -10,7 +10,7 @@ namespace Starmap
 	{
 
 		#region Fields
-		private float moveSpeed = 1.0f;
+		private float moveSpeed = 0.5f;
 		private float turnSpeed = MathHelper.ToRadians(5.0f); 
 		private int reward;
 		private int id;
@@ -101,9 +101,20 @@ namespace Starmap
 		public void ChangePath(List<Tile> newPath)
 		{
 			LinkedList<Tile> updatedPath = new LinkedList<Tile> (newPath);
-			while (updatedPath.First.Value.GridLocation != this.path.First.Value.GridLocation)
-				updatedPath.RemoveFirst();
-				
+			Point currentLocation = new Point ((int)(position.X + center.X) / Game1.Instance.GameSettings.TileWidth, 
+				(int)(position.Y + center.Y) / Game1.Instance.GameSettings.TileWidth);
+
+			// Try to stitch path together
+			while (updatedPath.First.Value.GridLocation != currentLocation)
+			{
+				updatedPath.RemoveFirst ();
+				// If we can't, path back through the beginning
+				if (updatedPath.Count == 0)
+				{
+					this.HitPoints = 0;
+					return;
+				}
+			}
 			this.path = updatedPath;
 		}
 		/*

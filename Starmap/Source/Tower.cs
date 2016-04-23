@@ -14,15 +14,17 @@ namespace Starmap
 		private const float ANGLE_TOLERANCE = 0.5f;
 		private AdjacentAgentSensor AASensor;
 		private float shotTimer = 0.5f;
+		private int shotsLeft;
 		#endregion
 
 		#region Properties
 		public int Damage { get { return damage; } }
 		public override Rectangle BoundingBox {
 			get {
-				return new Rectangle ((int)position.X, (int)position.Y, Width, Height);
+				return new Rectangle ((int)position.X - Width/2, (int)position.Y - Height/2, Width, Height);
 			}
 		}
+		public int ShotsLeft{ get { return shotsLeft; } }
 		#endregion
 
 		public Tower (Vector2 position, int damage, float range)
@@ -30,6 +32,7 @@ namespace Starmap
 			this.center = new Vector2 (Game1.Instance.GameSettings.TowerWidth / 2, Game1.Instance.GameSettings.TowerHeight / 2);
 			this.position = position;
 			this.damage = damage;
+			this.shotsLeft = Game1.Instance.GameSettings.TowerShots;
 			Initialize (range);
 		}
 
@@ -66,6 +69,7 @@ namespace Starmap
 		public void Draw(SpriteBatch sb)
 		{
 			sb.Draw (agentTexture, position, null, Color.White, heading, center, 1.0f, SpriteEffects.None, 0f);
+			sb.DrawString ((Screen.Instance as GameplayScreen).GameTextFont, ShotsLeft.ToString(), position, Color.Green);
 		}
 
 		private void Shoot(Unit target)
@@ -76,7 +80,7 @@ namespace Starmap
 				(Screen.Instance as GameplayScreen).AddReward (target.Reward);
 				(Screen.Instance as GameplayScreen).Units.Remove (target);
 			}
-
+			shotsLeft--;
 		}
 	}
 }

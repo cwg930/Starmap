@@ -11,9 +11,9 @@
 	<WallWidth>64</WallWidth>
 	<TowerHeight>30</TowerHeight>
 	<TowerWidth>30</TowerWidth>
-	<StartingResources>100</StartingResources>
+	<StartingResources>200</StartingResources>
 	<WaveReward>20</WaveReward>
-	<UnitReward>5</UnitReward>
+	<UnitReward>10</UnitReward>
 	<StartingWaveUnits>10</StartingWaveUnits>
 	<UnitsPerWave>5</UnitsPerWave>
 	<UnitStartingHP>20</UnitStartingHP>
@@ -24,4 +24,5 @@
 	<SpawnDelay>1</SpawnDelay>
 	<WaveDelay>10</WaveDelay>
 	<ShotDelay>.25</ShotDelay>
+	<TowerShots>10</TowerShots>
 </Settings>
