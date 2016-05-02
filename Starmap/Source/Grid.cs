@@ -118,6 +118,15 @@ namespace Starmap
 			}
 		}
 
+		public void Reset()
+		{
+			for (int i = 0; i < grid.GetLength (0); i++)
+			{
+				for (int j = 0; j < grid.GetLength (1); j++)
+							grid [i, j].SetOpen ();
+			}
+		}
+
 		// Get a 1D list of all tiles in the grid.
 		public List<Tile> GetTileList()
 		{
@@ -216,6 +225,9 @@ namespace Starmap
 						min = totalDistance [current];
 					}
 				}
+
+				if (openList.Count == 0)
+					return null;
 			}
 
 			// Path found, construct the path in reverse order.
@@ -254,15 +266,17 @@ namespace Starmap
 		{
 			Point location = tile.GridLocation;
 			List<Tile> surroundingTiles = new List<Tile> ();
-			if (location.X - 1 >= 0 && grid [location.X - 1, location.Y].TileStatus != Tile.Status.Closed)
-				surroundingTiles.Add (grid [location.X - 1, location.Y]);
-			if (location.X + 1 < grid.GetLength (0) && grid [location.X + 1, location.Y].TileStatus != Tile.Status.Closed)
-				surroundingTiles.Add (grid [location.X + 1, location.Y]);
-			if (location.Y - 1 >= 0 && grid [location.X, location.Y - 1].TileStatus != Tile.Status.Closed)
-				surroundingTiles.Add (grid [location.X, location.Y - 1]);
-			if (location.Y + 1 < grid.GetLength (1) && grid [location.X, location.Y + 1].TileStatus != Tile.Status.Closed)
-				surroundingTiles.Add (grid [location.X, location.Y + 1]);
-
+			if ((location.Y + 1 < 16) && (location.Y - 1 >= -1))
+			{
+				if (location.X - 1 >= 0 && grid [location.X - 1, location.Y].TileStatus != Tile.Status.Closed)
+					surroundingTiles.Add (grid [location.X - 1, location.Y]);
+				if (location.X + 1 < grid.GetLength (0) && grid [location.X + 1, location.Y].TileStatus != Tile.Status.Closed)
+					surroundingTiles.Add (grid [location.X + 1, location.Y]);
+				if (location.Y - 1 >= 0 && grid [location.X, location.Y - 1].TileStatus != Tile.Status.Closed)
+					surroundingTiles.Add (grid [location.X, location.Y - 1]);
+				if (location.Y + 1 < grid.GetLength (1) && grid [location.X, location.Y + 1].TileStatus != Tile.Status.Closed)
+					surroundingTiles.Add (grid [location.X, location.Y + 1]);
+			}
 			return surroundingTiles;
 		}
 		#endregion

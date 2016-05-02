@@ -29,6 +29,7 @@ namespace Starmap
 		public float SpawnDelay;
 		public float WaveDelay;
 		public float ShotDelay;
+		public int TowerShots;
 	}
 }
 
